@@ -23,22 +23,16 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params[:color]
 	
+	hh = {  :username => 'Введите имя',
+			:phone => 'Введите номер телефона',
+			:datetime => 'Введите дату и время'}
 
-	if @username == ''
-		@error = 'Введите имя'
-	end	
-
-	if @phone == ''
-		@error = 'Введите номер телефона'
-	end
-
-	if @datetime == ''
-		@error = 'Введите дату и время'
-	end	
-	
-	if @error != ''
-		return erb :visit
-	end 		
+	hh.each do |key, value|
+		if params[key] == ''
+			@error = value
+			return erb :visit	
+		end
+	end					
 
 	f = File.open './public/users.txt', 'a'
 	f.write "User: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}, Barber: #{@barber}, Color: #{@color}\n"
