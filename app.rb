@@ -22,14 +22,18 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@barber = params[:barber]
 	@color = params[:color]
+	
 
-	@message = "#{@username}, мы Вас записали!"
+	if @username == ''
+		@error = 'Введите имя'
+		return erb :visit
+	end	
 
 	f = File.open './public/users.txt', 'a'
 	f.write "User: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}, Barber: #{@barber}, Color: #{@color}\n"
 	f.close
 
-	erb :visit
+	erb "#{@username}, мы Вас записали!"
 end	
 
 get '/contacts' do
