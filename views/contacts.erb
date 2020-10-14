@@ -1,14 +1,11 @@
 <h2>Contacts</h2>
 
-<div class="alert alert-warning" role="alert">
-	<p><%= @message2 %></p>
-</div>
 
 <form action="/contacts" method="POST">
   
   <div class="form-group"> 
     <label id="aaa">E-mail</label>
-    <input name="e_mail" type="text" class="form-control ccc" placeholder="Введите ваш E-mail">
+    <input name="e_mail" type="text" class="form-control ccc" placeholder="Введите ваш E-mail" value="<%= @e_mail %>">
   </div>
   <p><b>Сообщение</b></p>
   <p><textarea rows="10" cols="45" name="text"></textarea></p>

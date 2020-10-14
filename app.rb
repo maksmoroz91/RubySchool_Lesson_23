@@ -48,12 +48,19 @@ end
 post '/contacts' do
 	@e_mail = params[:e_mail]
 	@text = params[:text]
-	
-	@message2 = "Отправленно"
 
+	hh = { :e_mail => 'Введите E-mail', :text => 'Введите сообщение'}
+
+	hh.each do |k, v|
+		if params[k] == ''
+			@error = v
+			return erb :contacts
+		end		
+	end
+	
 	d = File.open './public/contacts.txt', 'a'
 	d.write "E-mail: #{@e_mail}, SMS: #{@text}\n"
 	d.close
 
-	erb :contacts
+	erb "Собщение отпрвлено"
 end	
